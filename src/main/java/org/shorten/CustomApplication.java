@@ -1,7 +1,8 @@
 package org.shorten;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.LinkedHashSet;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class CustomApplication {
@@ -13,20 +14,22 @@ public class CustomApplication {
 	 * @return
 	 */
 	public static String shorthen(String value) {
+		if(Objects.isNull(value) || value.isEmpty()) {
+			return "";
+		}
 		
 		String[] characters = value.split("");
-		Map<String, Integer> charactersMap = new LinkedHashMap<>();
+		Set<String> charactersMap = new LinkedHashSet<>();
 		for (int index = 0; index < characters.length; index++) {
 			String nextCharacter = characters[index];
-			if(charactersMap.containsKey(nextCharacter)) {
-				Integer nextValue = charactersMap.get(nextCharacter) + 1;
-				charactersMap.put(nextCharacter, nextValue);
-			} else {
-				charactersMap.put(nextCharacter, 1);
+			if(!charactersMap.contains(nextCharacter)) {
+				charactersMap.add(nextCharacter);
 			}
 			
 		}
-		String result = charactersMap.keySet().stream().collect(Collectors.joining());
+		String result = charactersMap
+				.stream()
+				.collect(Collectors.joining());
 		return result;
 	}
 }
