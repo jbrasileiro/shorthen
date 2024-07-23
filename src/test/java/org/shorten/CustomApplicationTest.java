@@ -22,6 +22,8 @@ class CustomApplicationTest {
 	void shorthen(String value, String expected) {
 		String result = CustomApplication.shorthen(value);
 		Assertions.assertThat(result).isEqualTo(expected);
+		String resultV2 = CustomApplication.shorthenV2(value);
+		Assertions.assertThat(resultV2).isEqualTo(expected);
 	}
 
 }

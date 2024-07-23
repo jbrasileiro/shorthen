@@ -14,7 +14,7 @@ public class CustomApplication {
 	 * @return
 	 */
 	public static String shorthen(String value) {
-		if(Objects.isNull(value) || value.isEmpty()) {
+		if(Objects.isNull(value) || value.isEmpty()) { // add null check
 			return "";
 		}
 		
@@ -31,5 +31,23 @@ public class CustomApplication {
 				.stream()
 				.collect(Collectors.joining());
 		return result;
+	}
+	
+	public static String shorthenV2(String value) {
+		if(Objects.isNull(value) || value.isEmpty()) {
+			return "";
+		}
+		String[] characters = value.split("");
+		StringBuilder builder = new StringBuilder();
+		Set<String> charactersMap = new LinkedHashSet<>();
+		for (int index = 0; index < characters.length; index++) {
+			String nextCharacter = characters[index];
+			if(!charactersMap.contains(nextCharacter)) {
+				builder.append(nextCharacter);
+				charactersMap.add(nextCharacter);
+			}
+			
+		}
+		return builder.toString();
 	}
 }
